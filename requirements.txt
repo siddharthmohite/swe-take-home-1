@@ -2,3 +2,5 @@ sqlite-utils
 sqlalchemy
 fastapi
 uvicorn
+pandas
+scipy
