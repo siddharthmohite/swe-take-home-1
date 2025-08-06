@@ -1,2 +1,4 @@
 sqlite-utils
 sqlalchemy
+fastapi
+uvicorn
