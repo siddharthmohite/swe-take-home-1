@@ -1,6 +1,31 @@
 #  EcoVision: Climate Visualizer
 This project transforms raw climate metrics into intuitive visuals anyone can understand.
 
+# Index (Table of Contents)
+
+- [EcoVision: Climate Visualizer](#ecovision-climate-visualizer)
+- [Setup](#setup)
+  - [Clone the Repository](#clone-the-repository)
+  - [Create a python virtual environment](#create-a-python-virtual-environment)
+  - [Install Dependencies](#install-dependencies)
+- [Database Setup](#database-setup)
+- [Run Backend and Frontend](#run-backend-and-frontend)
+  - [Run the Backend](#run-the-backend)
+  - [Run the Frontend](#run-the-frontend)
+- [Testing Endpoints using swagger UI](#testing-endpoints-using-swagger-ui)
+- [Project Information](#project-information)
+  - [Tech Stack](#tech-stack)
+  - [Project Structure Backend](#project-structure-backend)
+  - [Project Structure Frontend](#project-structure-frontend)
+- [Database Schema](#database-schema)
+  - [Locations Table](#locations-table)
+  - [Metrics Table](#metrics-table)
+  - [ClimateData Table](#climatedata-table)
+  - [ER Diagram](#er-diagram)
+- [Libraries Used](#libraries-used)
+- [Challenges Faced (Use of AI Tools)](#challenges-faced-use-of-ai-tools)
+- [Future Improvements](#future-improvements)
+
 ## Setup
 
 1. **Clone the Repository**
