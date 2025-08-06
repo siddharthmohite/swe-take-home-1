@@ -4,6 +4,7 @@ This project transforms raw climate metrics into intuitive visuals anyone can un
 # Index (Table of Contents)
 
 - [EcoVision: Climate Visualizer](#ecovision-climate-visualizer)
+- [Pre-Requisites](#pre-requisites)
 - [Setup](#setup)
   - [Clone the Repository](#clone-the-repository)
   - [Create a python virtual environment](#create-a-python-virtual-environment)
@@ -26,6 +27,12 @@ This project transforms raw climate metrics into intuitive visuals anyone can un
 - [Challenges Faced (Use of AI Tools)](#challenges-faced-use-of-ai-tools)
 - [Future Improvements](#future-improvements)
 
+## Pre-Requisites
+Ensure the following are installed on your machine before starting the setup:
+
+- **Git**: To clone the repository.
+- **Python 3.x.x**: Any Python 3 version (e.g., Python 3.8, 3.9, etc.).
+- **pip**: Python package installer (comes bundled with Python 3+).
 ## Setup
 
 1. **Clone the Repository**
