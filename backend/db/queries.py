@@ -157,3 +157,75 @@ def fetch_summary_data(
     results = execute_query(stmt, as_mappings=True)
 
     return results
+
+def fetch_trends_data(
+    location_id: Optional[int] = None,
+    start_date: Optional[str] = None,
+    end_date: Optional[str] = None,
+    metric: Optional[str] = None,
+    quality_threshold: Optional[str] = None,
+    valid_qualities: Optional[List[str]] = None
+) -> List[dict]:
+    
+    # Build conditions
+    filters = []
+    if location_id:
+        filters.append(ClimateData.location_id == location_id)
+    if start_date:
+        filters.append(ClimateData.date >= start_date)
+    if end_date:
+        filters.append(ClimateData.date <= end_date)
+    if metric:
+        filters.append(Metric.name == metric)
+    if quality_threshold and valid_qualities:
+        filters.append(ClimateData.quality.in_(valid_qualities))
+
+
+    # Build query with aggregations and raw data for trends
+    stmt = (
+        select(
+            Metric.name.label("metric_name"),
+            Metric.unit.label("metric_unit"),
+            ClimateData.date,
+            ClimateData.value,
+            ClimateData.quality
+        )
+        .select_from(ClimateData)
+        .join(Metric, ClimateData.metric_id == Metric.id)
+        .where(and_(*filters))
+    )
+
+    # Execute query
+    results = execute_query(stmt, as_mappings=True)
+
+    return results
+
+def fetch_date_range(
+    location_id: Optional[int] = None,
+    metric: Optional[str] = None,
+    quality_threshold: Optional[str] = None,
+    valid_qualities: Optional[List[str]] = None
+) -> tuple[Optional[str], Optional[str]]:
+    # Build conditions
+    filters = []
+    if location_id:
+        filters.append(ClimateData.location_id == location_id)
+    if metric:
+        filters.append(Metric.name == metric)
+    if quality_threshold and valid_qualities:
+        filters.append(ClimateData.quality.in_(valid_qualities))
+
+    # Build query to fetch min and max dates
+    stmt = (
+        select(
+            func.min(ClimateData.date).label("min_date"),
+            func.max(ClimateData.date).label("max_date")
+        )
+        .select_from(ClimateData)
+        .join(Metric, ClimateData.metric_id == Metric.id)
+        .where(and_(*filters))
+    )
+
+    result  = execute_query(stmt, as_mappings=True)
+
+    return result[0].get("min_date"), result[0].get("max_date") if result else (None, None)
