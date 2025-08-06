@@ -3,6 +3,7 @@ import Filters from './components/Filters';
 import ChartContainer from './components/ChartContainer';
 import TrendAnalysis from './components/TrendAnalysis';
 import QualityIndicator from './components/QualityIndicator';
+import { getLocations, getMetrics, getClimateData, getClimateSummary, getTrendAnalysis } from './api';
 
 function App() {
   const [locations, setLocations] = useState([]);
@@ -19,7 +20,21 @@ function App() {
   });
   const [loading, setLoading] = useState(false);
 
-  // Existing useEffect for locations and metrics
+  useEffect(() => {
+    const fetchInitialData = async () => {
+      setLoading(true);
+      try {
+        const [locs, mets] = await Promise.all([getLocations(), getMetrics()]);
+        setLocations(locs?.data || []);
+        setMetrics(mets?.data || []);
+      } catch (error) {
+        console.error('Error fetching initial data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchInitialData();
+  }, []);
 
   // Updated fetch function to handle different analysis types
   const fetchData = async () => {
