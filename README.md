@@ -37,13 +37,15 @@ Ensure the following are installed on your machine before starting the setup:
 
 1. **Clone the Repository**
    ```bash
-   git clone [reporsitory-url]
+   git clone [repository-url]
+   Open Project in your IDE 
+   ```
 
 2. **Create a python virtual environment**
    ```bash
    python3 -m venv venv
    ```
-   **Select python Interpreter for the virtual environment created**
+   **[Optional]Select python Interpreter If other virtual environment is selected**
     ```bash
    CMD + SHIFT + P(MACOS)
    ```
@@ -51,31 +53,27 @@ Ensure the following are installed on your machine before starting the setup:
    ```bash
    source venv/bin/activate (macos)
    ```
-   **Select python Interpreter for the virtual environment created**
-   ```bash
-   CMD + SHIFT + P(MACOS)
-   ``` 
+
 3. **Install Dependencies**
    ```bash
-   cd swe-take-home-1-main
    pip install -r requirements.txt
    ```
 ## Datbase Setup
 1. **Go to backend folder and run load_data**
    ```bash
-   cd swe-take-home-1-main/backend
-   python3 load_data.py
+   cd backend
+   python3 db/load_data.py
    ```
 ## Run Backend and Frontend   
 1. **Run the Backend**
 
    ```bash
-   cd backend
    uvicorn app.app:app --reload --port 5000
    ```
 2. **Run the Frontend**
    ```bash
-   cd we-take-home-1-main/frontend
+   Open a new terminal in IDE
+   cd swe-take-home-1/frontend
    npm install
    npm run dev
    ```
