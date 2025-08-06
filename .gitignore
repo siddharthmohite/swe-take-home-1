@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.log
+
+# Virtual environments
+venv/
+.env/
+.envrc
+*.env
+
+# SQLite database
+*.db
+
+# VS Code settings
+.vscode/
+.idea/
+.DS_Store
+
+# Node.js
+node_modules/
+dist/
+*.local
+
+# Misc
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
