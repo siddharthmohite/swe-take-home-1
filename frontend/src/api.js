@@ -2,7 +2,7 @@
  * API service module for making requests to the backend
  */
 
-const API_BASE_URL = '/api/v1';
+const API_BASE_URL = 'http://127.0.0.1:5000/api/v1';
 
 /**
  * Fetch climate data with optional filters
@@ -11,7 +11,16 @@ const API_BASE_URL = '/api/v1';
  */
 export const getClimateData = async (filters = {}) => {
   try {
-    // TODO: Implement API call with filters
+    const queryParams = new URLSearchParams({
+      ...(filters.locationId && { location_id: filters.locationId }),
+      ...(filters.startDate && { start_date: filters.startDate }),
+      ...(filters.endDate && { end_date: filters.endDate }),
+      ...(filters.metric && { metric: filters.metric }),
+      ...(filters.qualityThreshold && { quality_threshold: filters.qualityThreshold })
+    }).toString();
+    const response = await fetch(`${API_BASE_URL}/climate?${queryParams}`);
+    if (!response.ok) throw new Error('Failed to fetch climate data');
+    return response.json();
   } catch (error) {
     console.error('API Error:', error);
     throw error;
@@ -24,7 +33,9 @@ export const getClimateData = async (filters = {}) => {
  */
 export const getLocations = async () => {
   try {
-    // TODO: Implement API call
+    const response = await fetch(`${API_BASE_URL}/locations`);
+    if (!response.ok) throw new Error('Failed to fetch locations');
+    return response.json();
   } catch (error) {
     console.error('API Error:', error);
     throw error;
@@ -37,7 +48,9 @@ export const getLocations = async () => {
  */
 export const getMetrics = async () => {
   try {
-    // TODO: Implement API call
+    const response = await fetch(`${API_BASE_URL}/metrics`);
+    if (!response.ok) throw new Error('Failed to fetch metrics');
+    return response.json();
   } catch (error) {
     console.error('API Error:', error);
     throw error;
@@ -51,7 +64,34 @@ export const getMetrics = async () => {
  */
 export const getClimateSummary = async (filters = {}) => {
   try {
-    // TODO: Implement API call with filters
+    const queryParams = new URLSearchParams({
+      ...(filters.locationId && { location_id: filters.locationId }),
+      ...(filters.startDate && { start_date: filters.startDate }),
+      ...(filters.endDate && { end_date: filters.endDate }),
+      ...(filters.metric && { metric: filters.metric }),
+      ...(filters.qualityThreshold && { quality_threshold: filters.qualityThreshold })
+    }).toString();
+    const response = await fetch(`${API_BASE_URL}/summary?${queryParams}`);
+    if (!response.ok) throw new Error('Failed to fetch summary');
+    return response.json();
+  } catch (error) {
+    console.error('API Error:', error);
+    throw error;
+  }
+};
+
+export const getTrendAnalysis = async (filters = {}) => {
+  try {
+    const queryParams = new URLSearchParams({
+      ...(filters.locationId && { location_id: filters.locationId }),
+      ...(filters.startDate && { start_date: filters.startDate }),
+      ...(filters.endDate && { end_date: filters.endDate }),
+      ...(filters.metric && { metric: filters.metric }),
+      ...(filters.qualityThreshold && { quality_threshold: filters.qualityThreshold })
+    }).toString();
+    const response = await fetch(`${API_BASE_URL}/trends?${queryParams}`);
+    if (!response.ok) throw new Error('Failed to fetch trends');
+    return response.json();
   } catch (error) {
     console.error('API Error:', error);
     throw error;
